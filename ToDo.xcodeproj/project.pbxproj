@@ -19,6 +19,9 @@
 		044D6610180A15BC00489A1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044D65F8180A15BC00489A1C /* UIKit.framework */; };
 		044D6618180A15BC00489A1C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 044D6616180A15BC00489A1C /* InfoPlist.strings */; };
 		044D661A180A15BC00489A1C /* ToDoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 044D6619180A15BC00489A1C /* ToDoTests.m */; };
+		044D6625180A165000489A1C /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044D6624180A165000489A1C /* TableViewController.m */; };
+		044D6639180A25BC00489A1C /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044D6638180A25BC00489A1C /* TableViewCell.m */; };
+		044D663B180A2AF100489A1C /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044D663A180A2AF100489A1C /* TableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,11 @@
 		044D6615180A15BC00489A1C /* ToDoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ToDoTests-Info.plist"; sourceTree = "<group>"; };
 		044D6617180A15BC00489A1C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		044D6619180A15BC00489A1C /* ToDoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToDoTests.m; sourceTree = "<group>"; };
+		044D6623180A165000489A1C /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		044D6624180A165000489A1C /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		044D6637180A25BC00489A1C /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
+		044D6638180A25BC00489A1C /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		044D663A180A2AF100489A1C /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,10 +115,14 @@
 		044D65FA180A15BC00489A1C /* ToDo */ = {
 			isa = PBXGroup;
 			children = (
+				044D6633180A207600489A1C /* View Controllers */,
 				044D6603180A15BC00489A1C /* AppDelegate.h */,
 				044D6604180A15BC00489A1C /* AppDelegate.m */,
 				044D6606180A15BC00489A1C /* Images.xcassets */,
 				044D65FB180A15BC00489A1C /* Supporting Files */,
+				044D6637180A25BC00489A1C /* TableViewCell.h */,
+				044D6638180A25BC00489A1C /* TableViewCell.m */,
+				044D663A180A2AF100489A1C /* TableViewCell.xib */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -142,6 +154,15 @@
 				044D6616180A15BC00489A1C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		044D6633180A207600489A1C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				044D6623180A165000489A1C /* TableViewController.h */,
+				044D6624180A165000489A1C /* TableViewController.m */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				044D65FF180A15BC00489A1C /* InfoPlist.strings in Resources */,
+				044D663B180A2AF100489A1C /* TableViewCell.xib in Resources */,
 				044D6607180A15BC00489A1C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,6 +262,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				044D6605180A15BC00489A1C /* AppDelegate.m in Sources */,
+				044D6639180A25BC00489A1C /* TableViewCell.m in Sources */,
+				044D6625180A165000489A1C /* TableViewController.m in Sources */,
 				044D6601180A15BC00489A1C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
