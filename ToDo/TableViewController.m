@@ -8,14 +8,18 @@
 
 #import "TableViewController.h"
 #import "TableViewCell.h"
+#import "objc/runtime.h"
 
 @interface TableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *cellArray;
+@property (strong, nonatomic) UIBarButtonItem *addButtonItem;
 
 @end
 
 @implementation TableViewController
+
+static char STRING_KEY;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -38,14 +42,11 @@
     UINib *tableViewCellNib = [UINib nibWithNibName:@"TableViewCell" bundle:nil];
     [self.tableView registerNib:tableViewCellNib forCellReuseIdentifier:@"TableViewCell"];
     
+    self.addButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(onAddButton)];
+    self.navigationItem.rightBarButtonItem = self.addButtonItem;
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     self.cellArray = [[NSMutableArray alloc] init];
-    
-    [self.cellArray addObject:@"line 1"];
-    [self.cellArray addObject:@"line 2"];
-    [self.cellArray addObject:@"line 3"];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,6 +77,9 @@
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    cell.textField.delegate = self;
+
+    objc_setAssociatedObject(cell.textField, &STRING_KEY, indexPath, OBJC_ASSOCIATION_RETAIN);
     cell.textField.text = self.cellArray[[indexPath indexAtPosition:1]];
     
     return cell;
@@ -88,7 +92,6 @@
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-
 
 
 // Override to support editing the table view.
@@ -107,17 +110,14 @@
 }
 
 
-
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    
     NSUInteger fromIndex = [fromIndexPath indexAtPosition:1];
     NSUInteger toIndex = [toIndexPath indexAtPosition:1];
     
     [self.cellArray exchangeObjectAtIndex: fromIndex withObjectAtIndex: toIndex];
     [tableView reloadData];
-
 }
 
 
@@ -128,6 +128,19 @@
     return YES;
 }
 
+- (void)onAddButton
+{
+    [self.cellArray addObject:@""];
+    [self.tableView reloadData];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSIndexPath *indexPath = objc_getAssociatedObject(textField, &STRING_KEY);
+    NSUInteger index = [indexPath indexAtPosition:1];
+    [self.cellArray setObject:textField.text atIndexedSubscript:index];
+    [self.tableView reloadData];
+}
 
 /*
 #pragma mark - Navigation
