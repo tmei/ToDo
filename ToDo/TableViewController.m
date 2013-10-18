@@ -46,7 +46,8 @@ static char STRING_KEY;
     self.navigationItem.rightBarButtonItem = self.addButtonItem;
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-    self.cellArray = [[NSMutableArray alloc] init];
+//    self.cellArray = [[NSMutableArray alloc] init];
+    self.cellArray = [self loadFromUserDefaults];
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,10 +104,11 @@ static char STRING_KEY;
         
         [self.cellArray removeObjectAtIndex:[indexPath indexAtPosition:1]];
         [tableView reloadData];
-    }   
+    }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
+    [self saveToUserDefaults];
 }
 
 
@@ -118,6 +120,7 @@ static char STRING_KEY;
     
     [self.cellArray exchangeObjectAtIndex: fromIndex withObjectAtIndex: toIndex];
     [tableView reloadData];
+    [self saveToUserDefaults];
 }
 
 
@@ -132,6 +135,7 @@ static char STRING_KEY;
 {
     [self.cellArray addObject:@""];
     [self.tableView reloadData];
+    [self saveToUserDefaults];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -140,7 +144,29 @@ static char STRING_KEY;
     NSUInteger index = [indexPath indexAtPosition:1];
     [self.cellArray setObject:textField.text atIndexedSubscript:index];
     [self.tableView reloadData];
+    [self saveToUserDefaults];
 }
+
+#pragma mark - user defaults
+
+-(void)saveToUserDefaults
+{
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [standardUserDefaults setObject:self.cellArray forKey:@"cellArray"];
+    [standardUserDefaults synchronize];
+}
+
+-(NSMutableArray *)loadFromUserDefaults
+{
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *cellArrayDefaults = [[standardUserDefaults arrayForKey:@"cellArray"] mutableCopy];
+    if(cellArrayDefaults == nil) {
+        cellArrayDefaults = [[NSMutableArray alloc] init];
+    }
+    return cellArrayDefaults;
+}
+
 
 /*
 #pragma mark - Navigation
@@ -152,6 +178,6 @@ static char STRING_KEY;
     // Pass the selected object to the new view controller.
 }
 
- */
+*/
 
 @end
