@@ -46,8 +46,7 @@ static char STRING_KEY;
     self.navigationItem.rightBarButtonItem = self.addButtonItem;
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-//    self.cellArray = [[NSMutableArray alloc] init];
-    self.cellArray = [self loadFromUserDefaults];
+    [self loadFromUserDefaults];
 }
 
 - (void)didReceiveMemoryWarning
@@ -157,14 +156,13 @@ static char STRING_KEY;
     [standardUserDefaults synchronize];
 }
 
--(NSMutableArray *)loadFromUserDefaults
+-(void)loadFromUserDefaults
 {
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *cellArrayDefaults = [[standardUserDefaults arrayForKey:@"cellArray"] mutableCopy];
-    if(cellArrayDefaults == nil) {
-        cellArrayDefaults = [[NSMutableArray alloc] init];
+    self.cellArray = [[standardUserDefaults arrayForKey:@"cellArray"] mutableCopy];
+    if(self.cellArray == nil) {
+        self.cellArray = [[NSMutableArray alloc] init];
     }
-    return cellArrayDefaults;
 }
 
 
